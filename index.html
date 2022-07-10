@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floral Switcher</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        .bi:hover{
+            color:black;
+        }
+        .up,.down{
+            background-color: white;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 3px;
+            color: dimgray;
+            z-index: 3;
+        }
+        .up{ 
+            position: absolute;
+            left: 0;
+            top: 45vh;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .down{
+            position: absolute;
+            right: 0;
+            top: 55vh;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .row{
+            display: flex;
+        }
+        .col{
+            position: relative;
+            height: 100vh;
+        }
+        .col:nth-child(1){
+            width: 40vw;
+            overflow: hidden;
+        }
+        .col:nth-child(2){
+            width: 60vw;
+        }
+        
+        .left{
+            position: absolute;
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            gap: 10rem;
+            transition-duration: 1s;
+        }
+        .right{
+            overflow: hidden;
+        }
+        .col_inner{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            color: white;
+        }
+        .left .col_inner h4{
+            font-size: 35px;
+            margin-bottom: 0;
+        }
+        .more-btn{
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: xx-small;
+            font-weight: bolder;
+        }
+        .left .col_inner .sp{
+            font-size: xx-small;
+        }
+        .right img{
+            height: 100vh;
+            width: 100%;
+            transition-duration: 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container row">
+        <div class="col">
+            <div style="position:relative;">
+                <div class="left" style="background-color: rgb(173, 131, 53);">
+                    <div class="col_inner">
+                        <h4>Probably <br> not</h4>
+                        <span class="sp">Be part of our creation</span>
+                        <div class="more-btn">
+                            <div><span>More</span></div>
+                            <div><i class="bi bi-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="left" style="background-color: rgb(41, 40, 39);">
+                    <div class="col_inner">
+                        <h4>Probably <br> not</h4>
+                        <span class="sp">Be part of our creation</span>
+                        <div class="more-btn">
+                            <div><span>More</span></div>
+                            <div><i class="bi bi-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="left" style="background-color: rgb(155, 104, 170);">
+                    <div class="col_inner">
+                        <h4>Probably <br> not</h4>
+                        <span class="sp">Be part of our creation</span>
+                        <div class="more-btn">
+                            <div><span>More</span></div>
+                            <div><i class="bi bi-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <i class="bi bi-arrow-down-short down"></i>
+            </div>
+        </div>
+        <div class="col right">
+                <div class="bi bi-arrow-up-short up"></div>
+                    <img src="./img/FOCUS.jpg" alt="" style='position: absolute;'>
+                    <img src="./img/FLY.jpg" alt="" style='position: absolute;'>
+                    <img src="./img/cloud.jpg" style='position: absolute;' alt="">
+            
+        </div>
+    </div>
+
+    <script>
+        let downBtn = document.querySelector('.down'),
+            upBtn = document.querySelector('.up')
+            lefts = document.querySelectorAll('.left'),
+            rights = document.querySelectorAll('img');
+        function reset(){
+            for (let i = 0; i < rights.length; i++) {
+                let current = i * 100;
+                rights[i].style.top = `${-current}%`
+            }
+            for (let i = 0; i < lefts.length; i++) {
+                let current = i * window.innerHeight;
+                lefts[i].style.top = `${current}px`
+            }
+        }
+        reset();
+            
+        downBtn.addEventListener('click', ()=>{
+            for(let right of rights){
+                let top = Number(right.style.top.slice(0,this.length-1))
+                top = top + 100;
+                right.style.top = `${top}%`
+            }
+            for (let left of lefts) {
+                let ltop = Number(left.style.top.slice(0, this.length - 2))
+                ltop = ltop - window.innerHeight;
+                left.style.top = `${ltop}px`
+            }
+        })
+
+        upBtn.addEventListener('click', () => {
+            for (let right of rights) {
+                let top = Number(right.style.top.slice(0, this.length - 1))
+                top = top - 100;
+                right.style.top = `${top}%`
+            }
+            for (let left of lefts) {
+                let top = Number(left.style.top.slice(0, this.length - 2))
+                top = top + window.innerHeight;
+                left.style.top = `${top}px`
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
+
